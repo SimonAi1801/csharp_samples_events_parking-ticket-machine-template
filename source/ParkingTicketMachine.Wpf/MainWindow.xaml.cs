@@ -29,28 +29,29 @@ namespace ParkingTicketMachine.Wpf
 
         private void Instance_OneMinuteIsOver(object sender, DateTime e)
         {
-            Title = FastClock.Instance.Time.ToShortTimeString();
+            Title = $"Parkscheinzentrale, {FastClock.Instance.Time.ToShortTimeString()}"; ;
         }
 
         private void ButtonNew_Click(object sender, RoutedEventArgs e)
         {
-            SlotMachineWindow newSlotMachine = new SlotMachineWindow(TextBoxAddress.Text, OnReadyTicket);
+            SlotMachineWindow newSlotMachine = new SlotMachineWindow(TextBoxAddress.Text, OnReadyTicket) {Owner = this };
             newSlotMachine.Show();
+        }
+        private void OnReadyTicket(object sender, Ticket ticket)
+        {
+            string text = $"{ticket.Location}";
+            AddLineToTextBox(text);
         }
 
         void AddLineToTextBox(string line)
         {
             StringBuilder text = new StringBuilder(TextBlockLog.Text);
-            text.Append(line + "\n");
+            text.Append("\n");
+            text.Append(FastClock.Instance.Time.ToShortTimeString() + " \t ");
+            text.Append(line + " \t ");
             text.Append(FastClock.Instance.Time.ToShortDateString() + " \t ");
             text.Append(FastClock.Instance.Time.ToShortTimeString() + "\t");
             TextBlockLog.Text = text.ToString();
-        }
-
-        private void OnReadyTicket(object sender, Ticket ticket)
-        {
-            string text = $"{TextBoxAddress.Text}";
-            AddLineToTextBox(text);
         }
 
     }

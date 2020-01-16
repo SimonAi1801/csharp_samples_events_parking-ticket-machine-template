@@ -8,18 +8,22 @@
         BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"
         xmlns:local="clr-namespace:ParkingTicketMachine.Wpf"
         mc:Ignorable="d"
-        Title="Parkticketverwaltung"  Margin="3" Width="600" Height="500" Loaded="Window_Loaded" ResizeMode="NoResize">
+        Title="Parkticketverwaltung" Margin="3" Width="600" Height="500" Loaded="Window_Loaded" ResizeMode="NoResize">
     <Grid Margin="3">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="19*"/>
+            <ColumnDefinition Width="127*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DockPanel Margin="3">
+        <DockPanel Margin="3,3,3.4,3.2" Grid.ColumnSpan="2">
             <Label Content="Adresse des Parkscheiautomaten:" Margin="3" VerticalAlignment="Center"/>
             <TextBox x:Name="TextBoxAddress" Margin="3" VerticalAlignment="Center" Width="250"/>
             <Button x:Name="ButtonNew" Content="New SlotMachine" Margin="5" VerticalAlignment="Center" Width="120" Height="30" DockPanel.Dock="Right" Click="ButtonNew_Click"/>
         </DockPanel>
-        <ScrollViewer Grid.Row="1" >
+        <ScrollViewer Grid.ColumnSpan="2" Margin="0,47,0.4,0" Grid.RowSpan="2" >
             <TextBlock x:Name="TextBlockLog" TextWrapping="Wrap" />
         </ScrollViewer>
 

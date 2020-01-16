@@ -4,11 +4,23 @@ namespace ParkingTicketMachine.Core
 {
     public class SlotMachine
     {
-        public string Name { get; set; }
+        public event EventHandler<Ticket> LogTicket;
+        private Ticket _ticket;
 
-        public SlotMachine(string name)
+
+        public void Print()
         {
-            Name = name;
+            LogTicket?.Invoke(this, _ticket);
+        }
+
+        public void Cancle()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Insert()
+        {
+            throw new NotImplementedException();
         }
     }
 }

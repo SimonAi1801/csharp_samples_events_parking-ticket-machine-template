@@ -4,6 +4,13 @@ namespace ParkingTicketMachine.Core
 {
     public class Ticket
     {
-        private EventHandler<Ticket> _logTicket;
+        public string Location { get; set; }
+
+        public int Money { get; set; }
+
+        public Ticket(string location)
+        {
+            Location = location;
+        }
     }
 }
