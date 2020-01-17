@@ -20,29 +20,30 @@ namespace ParkingTicketMachine.Core
             _ticket = new Ticket();
             _ticket.Description = _name;
             _ticket.Amount = _slot;
+            _slot = 0;
             LogTicket?.Invoke(this, _ticket);
         }
 
         public void Cancle()
         {
-            _ticket.Amount = 0;
+            _slot = 0;
         }
 
         public DateTime Insert(int coin)
         {
-            DateTime parkingTime = FastClock.Instance.Time;
+            DateTime realTime = FastClock.Instance.Time;
+            DateTime parkingTime = DateTime.MaxValue;
             _slot += coin;
-            if (_ticket.Amount >= 50)
+            if (_slot >= 50)
             {
 
-
-
-
-
-
-                //if (FastClock.Instance.Time >= Convert.ToDateTime("08:00") && 
+                //if (FastClock.Instance.Time >= Convert.ToDateTime("08:00") &&
                 //    FastClock.Instance.Time <= Convert.ToDateTime("18:00"))
-                
+                //{
+
+                //}
+
+
             }
             return parkingTime;
         }

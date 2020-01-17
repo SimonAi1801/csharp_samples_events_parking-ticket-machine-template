@@ -24,10 +24,15 @@ namespace ParkingTicketMachine.Wpf
             {
                 TextBoxTimeUntil.Text = "Bitte Münzen einwerfen!";
             }
-            FastClock.Instance.IsRunning = false;
-            int[] coins = { 10, 20, 50, 100, 200 };
-            int coin = coins[ListBoxCoins.SelectedIndex];
-            DateTime parkingTime = _slotMachine.Insert(coin);
+            else
+            {
+                FastClock.Instance.IsRunning = false;
+                int[] coins = { 10, 20, 50, 100, 200 };
+                int coin = coins[ListBoxCoins.SelectedIndex];
+                DateTime parkingTime = _slotMachine.Insert(coin);
+                TextBoxTimeUntil.Text = parkingTime.ToShortTimeString();
+                MessageBox.Show($"Sie dürfen bis {parkingTime.ToString()} parken!");
+            }
         }
 
         private void ButtonPrintTicket_Click(object sender, RoutedEventArgs e)
@@ -39,8 +44,8 @@ namespace ParkingTicketMachine.Wpf
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             _slotMachine.Cancle();
-            TextBoxTimeUntil.Text = "";
             FastClock.Instance.IsRunning = true;
+            TextBoxTimeUntil.Text = "Abbruch!";
         }
     }
 }

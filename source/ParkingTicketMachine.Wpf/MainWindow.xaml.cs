@@ -17,6 +17,7 @@ namespace ParkingTicketMachine.Wpf
 
         private void Window_Loaded(object sender, EventArgs e)
         {
+            
             FastClock.Instance.Factor = 360;
             FastClock.Instance.Time = DateTime.Parse("16:30:00");
             FastClock.Instance.IsRunning = true;
@@ -39,7 +40,7 @@ namespace ParkingTicketMachine.Wpf
         }
         private void OnReadyTicket(object sender, Ticket ticket)
         {
-            string text = $"{ticket.Description}:";
+            string text = $"{ticket.Description}: ";
             AddLineToTextBox(text, ticket.Amount);
         }
 
