@@ -40,17 +40,17 @@ namespace ParkingTicketMachine.Wpf
         private void OnReadyTicket(object sender, Ticket ticket)
         {
             string text = $"{ticket.Description}:";
-            AddLineToTextBox(text, ticket);
+            AddLineToTextBox(text, ticket.Amount);
         }
 
-        void AddLineToTextBox(string line, Ticket ticket)
+        void AddLineToTextBox(string line, int amount)
         {
             StringBuilder text = new StringBuilder(TextBlockLog.Text);
             text.Append("\n");
             text.Append(FastClock.Instance.Time.ToShortTimeString() + " \t ");
             text.Append(line + " \t ");
             text.Append(FastClock.Instance.Time.ToString() + " \t ");
-            text.Append($"{ticket.Amount} Cent");
+            text.Append($"{amount} Cent");
             TextBlockLog.Text = text.ToString();
         }
 
