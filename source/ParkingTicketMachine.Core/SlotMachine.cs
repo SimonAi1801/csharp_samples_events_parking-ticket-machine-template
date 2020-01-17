@@ -7,6 +7,10 @@ namespace ParkingTicketMachine.Core
         public event EventHandler<Ticket> LogTicket;
         private Ticket _ticket;
 
+        public SlotMachine()
+        {
+            _ticket = new Ticket();
+        }
 
         public void Print()
         {
@@ -15,12 +19,24 @@ namespace ParkingTicketMachine.Core
 
         public void Cancle()
         {
-            throw new NotImplementedException();
+            _ticket.Slot = 0;
         }
 
-        public void Insert()
+        public void Insert(int coin)
         {
-            throw new NotImplementedException();
+            _ticket.Slot += coin;
+            if (_ticket.Slot >= 50)
+            {
+                if (FastClock.Instance.Time >= Convert.ToDateTime("08:00") && 
+                    FastClock.Instance.Time <= Convert.ToDateTime("18:00"))
+                {
+                    
+                }
+                else
+                {
+
+                }
+            }
         }
     }
 }

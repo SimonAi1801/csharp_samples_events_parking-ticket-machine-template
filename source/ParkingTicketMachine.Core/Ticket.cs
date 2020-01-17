@@ -6,11 +6,10 @@ namespace ParkingTicketMachine.Core
     {
         public string Location { get; set; }
 
-        public int Money { get; set; }
+        public int Slot { get; set; }
 
-        public Ticket(string location)
+        public Ticket()
         {
-            Location = location;
         }
     }
 }

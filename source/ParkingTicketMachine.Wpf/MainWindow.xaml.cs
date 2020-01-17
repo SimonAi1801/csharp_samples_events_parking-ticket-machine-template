@@ -49,8 +49,7 @@ namespace ParkingTicketMachine.Wpf
             text.Append("\n");
             text.Append(FastClock.Instance.Time.ToShortTimeString() + " \t ");
             text.Append(line + " \t ");
-            text.Append(FastClock.Instance.Time.ToShortDateString() + " \t ");
-            text.Append(FastClock.Instance.Time.ToShortTimeString() + "\t");
+            text.Append(FastClock.Instance.Time.ToString());
             TextBlockLog.Text = text.ToString();
         }
 
