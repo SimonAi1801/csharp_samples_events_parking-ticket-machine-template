@@ -31,12 +31,22 @@ namespace ParkingTicketMachine.Core
 
         public DateTime Insert(int coin)
         {
-            DateTime realTime = FastClock.Instance.Time;
             DateTime parkingTime = DateTime.MaxValue;
             _slot += coin;
             if (_slot >= 50)
             {
-
+                if (_slot >= 50 && _slot < 100)
+                {
+                    parkingTime.AddHours(0.5);
+                }
+                else if (_slot >= 100 && _slot < 200)
+                {
+                    parkingTime.AddHours(1);
+                }
+                else if (_slot >= 200)
+                {
+                    parkingTime.AddHours(1.5);
+                }
                 //if (FastClock.Instance.Time >= Convert.ToDateTime("08:00") &&
                 //    FastClock.Instance.Time <= Convert.ToDateTime("18:00"))
                 //{

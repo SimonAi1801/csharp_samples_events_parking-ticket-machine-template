@@ -10,6 +10,7 @@ namespace ParkingTicketMachine.Wpf
     public partial class SlotMachineWindow
     {
         private readonly SlotMachine _slotMachine;
+        private DateTime _parkingTime;
         public SlotMachineWindow(string name, EventHandler<Ticket> ticketReady)
         {
             InitializeComponent();
@@ -29,15 +30,15 @@ namespace ParkingTicketMachine.Wpf
                 FastClock.Instance.IsRunning = false;
                 int[] coins = { 10, 20, 50, 100, 200 };
                 int coin = coins[ListBoxCoins.SelectedIndex];
-                DateTime parkingTime = _slotMachine.Insert(coin);
-                TextBoxTimeUntil.Text = parkingTime.ToShortTimeString();
-                MessageBox.Show($"Sie dürfen bis {parkingTime.ToString()} parken!");
+                _parkingTime = _slotMachine.Insert(coin);
+                TextBoxTimeUntil.Text = _parkingTime.ToShortTimeString();
             }
         }
 
         private void ButtonPrintTicket_Click(object sender, RoutedEventArgs e)
         {
             _slotMachine.Print();
+            MessageBox.Show($"Sie dürfen bis {_parkingTime.ToString()} parken!");
             FastClock.Instance.IsRunning = true;
         }
 
