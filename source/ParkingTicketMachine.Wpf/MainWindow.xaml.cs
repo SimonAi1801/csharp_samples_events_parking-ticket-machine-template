@@ -29,7 +29,7 @@ namespace ParkingTicketMachine.Wpf
 
         private void Instance_OneMinuteIsOver(object sender, DateTime e)
         {
-            Title = $"Parkscheinzentrale, {FastClock.Instance.Time.ToShortTimeString()}"; ;
+            Title = $"Parkscheinzentrale, {FastClock.Instance.Time.ToShortTimeString()}";
         }
 
         private void ButtonNew_Click(object sender, RoutedEventArgs e)
@@ -39,17 +39,18 @@ namespace ParkingTicketMachine.Wpf
         }
         private void OnReadyTicket(object sender, Ticket ticket)
         {
-            string text = $"{ticket.Location}";
-            AddLineToTextBox(text);
+            string text = $"{ticket.Description}:";
+            AddLineToTextBox(text, ticket);
         }
 
-        void AddLineToTextBox(string line)
+        void AddLineToTextBox(string line, Ticket ticket)
         {
             StringBuilder text = new StringBuilder(TextBlockLog.Text);
             text.Append("\n");
             text.Append(FastClock.Instance.Time.ToShortTimeString() + " \t ");
             text.Append(line + " \t ");
-            text.Append(FastClock.Instance.Time.ToString());
+            text.Append(FastClock.Instance.Time.ToString() + " \t ");
+            text.Append($"{ticket.Amount} Cent");
             TextBlockLog.Text = text.ToString();
         }
 

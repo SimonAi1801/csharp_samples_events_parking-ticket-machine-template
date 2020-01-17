@@ -4,9 +4,9 @@ namespace ParkingTicketMachine.Core
 {
     public class Ticket
     {
-        public string Location { get; set; }
+        public int Amount { get; set; }
 
-        public int Slot { get; set; }
+        public string Description { get; set; }
 
         public Ticket()
         {

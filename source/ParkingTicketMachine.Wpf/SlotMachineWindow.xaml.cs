@@ -9,13 +9,12 @@ namespace ParkingTicketMachine.Wpf
     /// </summary>
     public partial class SlotMachineWindow
     {
-        private readonly SlotMachine _slotMachine = new SlotMachine();
-        private Ticket _ticket = new Ticket();
+        private readonly SlotMachine _slotMachine;
         public SlotMachineWindow(string name, EventHandler<Ticket> ticketReady)
         {
             InitializeComponent();
             Title = name;
-            _ticket.Location = name;
+            _slotMachine = new SlotMachine(name);
             _slotMachine.LogTicket += ticketReady;
         }
 
@@ -28,7 +27,7 @@ namespace ParkingTicketMachine.Wpf
             FastClock.Instance.IsRunning = false;
             int[] coins = { 10, 20, 50, 100, 200 };
             int coin = coins[ListBoxCoins.SelectedIndex];
-            _slotMachine.Insert(coin);
+            DateTime parkingTime = _slotMachine.Insert(coin);
         }
 
         private void ButtonPrintTicket_Click(object sender, RoutedEventArgs e)

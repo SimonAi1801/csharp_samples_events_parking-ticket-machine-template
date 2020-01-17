@@ -5,38 +5,46 @@ namespace ParkingTicketMachine.Core
     public class SlotMachine
     {
         public event EventHandler<Ticket> LogTicket;
+        private int _slot;
         private Ticket _ticket;
+        private string _name;
 
-        public SlotMachine()
+
+        public SlotMachine(string name)
         {
-            _ticket = new Ticket();
+            _name = name;
         }
 
         public void Print()
         {
+            _ticket = new Ticket();
+            _ticket.Description = _name;
+            _ticket.Amount = _slot;
             LogTicket?.Invoke(this, _ticket);
         }
 
         public void Cancle()
         {
-            _ticket.Slot = 0;
+            _ticket.Amount = 0;
         }
 
-        public void Insert(int coin)
+        public DateTime Insert(int coin)
         {
-            _ticket.Slot += coin;
-            if (_ticket.Slot >= 50)
+            DateTime parkingTime = FastClock.Instance.Time;
+            _slot += coin;
+            if (_ticket.Amount >= 50)
             {
-                if (FastClock.Instance.Time >= Convert.ToDateTime("08:00") && 
-                    FastClock.Instance.Time <= Convert.ToDateTime("18:00"))
-                {
-                    
-                }
-                else
-                {
 
-                }
+
+
+
+
+
+                //if (FastClock.Instance.Time >= Convert.ToDateTime("08:00") && 
+                //    FastClock.Instance.Time <= Convert.ToDateTime("18:00"))
+                
             }
+            return parkingTime;
         }
     }
 }
