@@ -56,21 +56,21 @@ namespace ParkingTicketMachine.Core
 
                 if (FastClock.Instance.Time.TimeOfDay < _startTime.TimeOfDay)
                 {
-                    FastClock.Instance.Time.AddMinutes(_minutes + _startTime.TimeOfDay.TotalMinutes);
+                    ValidUntil = FastClock.Instance.Time.AddMinutes(_minutes + _startTime.TimeOfDay.TotalMinutes);
                 }
                 else if (FastClock.Instance.Time.TimeOfDay > _endTime.TimeOfDay)
                 {
-                    FastClock.Instance.Time.AddDays(1);
-                    FastClock.Instance.Time.AddMinutes(_minutes + _startTime.TimeOfDay.TotalMinutes);
+                    ValidUntil = FastClock.Instance.Time.AddDays(1);
+                    ValidUntil = FastClock.Instance.Time.AddMinutes(_minutes + _startTime.TimeOfDay.TotalMinutes);
                 }
                 else
                 {
                     ValidUntil = FastClock.Instance.Time.AddMinutes(_minutes);
                     if (ValidUntil > _endTime)
                     {
-                        TimeSpan timeSpan = _endTime.TimeOfDay - ValidUntil.TimeOfDay;
-                        FastClock.Instance.Time.AddDays(1);
-                        FastClock.Instance.Time.AddMinutes(timeSpan.TotalMinutes + _startTime.TimeOfDay.TotalMinutes);
+                        TimeSpan timeSpan = ValidUntil.TimeOfDay - _endTime.TimeOfDay;
+                        ValidUntil = FastClock.Instance.Time.AddDays(1);
+                        ValidUntil = ValidUntil.Date.AddMinutes(timeSpan.TotalMinutes + _startTime.TimeOfDay.TotalMinutes);
                     }
                 }
 
