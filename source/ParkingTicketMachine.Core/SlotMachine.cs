@@ -14,8 +14,6 @@ namespace ParkingTicketMachine.Core
         private double _minutes = 0;
         public DateTime ValidUntil { get; private set; }
 
-
-
         public SlotMachine(string name)
         {
             _name = name;
@@ -61,7 +59,7 @@ namespace ParkingTicketMachine.Core
                 else if (FastClock.Instance.Time.TimeOfDay > _endTime.TimeOfDay)
                 {
                     ValidUntil = FastClock.Instance.Time.AddDays(1);
-                    ValidUntil = FastClock.Instance.Time.AddMinutes(_minutes + _startTime.TimeOfDay.TotalMinutes);
+                    ValidUntil = ValidUntil.Date.AddMinutes(_minutes + _startTime.TimeOfDay.TotalMinutes);
                 }
                 else
                 {
@@ -73,7 +71,6 @@ namespace ParkingTicketMachine.Core
                         ValidUntil = ValidUntil.Date.AddMinutes(timeSpan.TotalMinutes + _startTime.TimeOfDay.TotalMinutes);
                     }
                 }
-
                 validTime = ValidUntil.ToShortTimeString();
             }
             return validTime;
